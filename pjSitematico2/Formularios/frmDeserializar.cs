@@ -57,15 +57,6 @@ namespace pjSitematico2.Formularios
             frm.Show();
         }
 
-        private void btnAbrir_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog selectorArchivo = new OpenFileDialog();
-            DialogResult resultado = selectorArchivo.ShowDialog();
-
-            if (resultado == DialogResult.Cancel)
-                return;
-        }
-
         private void btnDeserializar_Click(object sender, EventArgs e)
         {
 

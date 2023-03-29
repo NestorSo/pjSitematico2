@@ -55,7 +55,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.btnAñadirRegistro = new System.Windows.Forms.Button();
             this.Home.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pExit)).BeginInit();
@@ -279,7 +278,7 @@
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(179, 22);
             this.txtTitulo.TabIndex = 17;
-            this.txtTitulo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAutor_KeyPress);
+            this.txtTitulo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTitulo_KeyPress);
             // 
             // panel6
             // 
@@ -319,7 +318,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(589, 165);
+            this.pictureBox1.Location = new System.Drawing.Point(569, 165);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(130, 130);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -337,23 +336,18 @@
             this.txtCodigo.TabIndex = 23;
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(364, 412);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(90, 23);
-            this.btnGuardar.TabIndex = 24;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
             // btnAñadirRegistro
             // 
-            this.btnAñadirRegistro.Location = new System.Drawing.Point(228, 412);
+            this.btnAñadirRegistro.FlatAppearance.BorderSize = 0;
+            this.btnAñadirRegistro.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(69)))), ((int)(((byte)(61)))));
+            this.btnAñadirRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(106)))), ((int)(((byte)(94)))));
+            this.btnAñadirRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAñadirRegistro.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAñadirRegistro.Location = new System.Drawing.Point(258, 404);
             this.btnAñadirRegistro.Name = "btnAñadirRegistro";
-            this.btnAñadirRegistro.Size = new System.Drawing.Size(104, 23);
+            this.btnAñadirRegistro.Size = new System.Drawing.Size(143, 34);
             this.btnAñadirRegistro.TabIndex = 25;
-            this.btnAñadirRegistro.Text = "Añadir Registro";
+            this.btnAñadirRegistro.Text = "AÑADIR";
             this.btnAñadirRegistro.UseVisualStyleBackColor = true;
             this.btnAñadirRegistro.Click += new System.EventHandler(this.btnAñadirRegistro_Click);
             // 
@@ -364,7 +358,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(128)))), ((int)(((byte)(114)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnAñadirRegistro);
-            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.txtCodigo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel8);
@@ -428,7 +421,6 @@
         private Panel panel8;
         private PictureBox pictureBox1;
         private TextBox txtCodigo;
-        private Button btnGuardar;
         private Button btnAñadirRegistro;
     }
 }

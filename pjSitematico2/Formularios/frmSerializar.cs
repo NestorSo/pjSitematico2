@@ -98,45 +98,6 @@ namespace pjSitematico2.Formularios
             File.WriteAllText(fileName, jsonString);
         }
 
-
-
-
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog selectorArchivo = new SaveFileDialog();
-            DialogResult resultado = selectorArchivo.ShowDialog();
-            string nombreArchivo;
-
-            selectorArchivo.CheckFileExists = false;
-
-            if (resultado == DialogResult.Cancel)
-                return;
-
-            nombreArchivo = selectorArchivo.FileName;
-
-            if (nombreArchivo == "" || nombreArchivo == null)
-                MessageBox.Show("Nombre de archivo inválido", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-            {
-                try
-                {
-                    salida = new FileStream(nombreArchivo, FileMode.OpenOrCreate,
-                        FileAccess.Write);
-
-                    btnGuardar.Enabled = false;
-                    btnSerializar.Enabled = true;
-                }
-                catch (IOException)
-                {
-                    MessageBox.Show("Error al abrir el archivo", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-
         public void LimpiarCajasDeTexto()
         {
 
@@ -152,42 +113,54 @@ namespace pjSitematico2.Formularios
 
         private void btnAñadirRegistro_Click(object sender, EventArgs e)
         {
-            //Guardamos el isbn del libro
-            valorIsbn = txtCodigo.Text;
-
-            //while (!int.TryParse(valorIsbn, out isbn))
-            //{
-            //    MessageBox.Show("El valor de entrada es incorrecto, introduzca un valor entero", "Error de registro",
-            //         MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    valorIsbn = txtCodigo.Text;
-            //}
-
-            //guardamos el titulo del libro
-
-            titulo = txtTitulo.Text;
-
-            //leemos el nombre del autor 
-            autor = txtAutor.Text;
-
-            //guardamos la editorial del libro 
-            editorial = txtEditorial.Text;
-
-            //guardamos el valor del numero de paginas 
-            numeroDePaginas = int.Parse(txtPaginas.Text);
-
-            //while (!decimal.TryParse(valorNumeroDePaginas, out numeroDePaginas))
-            //{
-            //    MessageBox.Show("El valor de entrada es incorrecto, introduzca un valor entero", "Error de registro",
-            //          MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    valorNumeroDePaginas = txtPaginas.Text;
-            //}
-
-            registro = new RegistroDeLibros(valorIsbn, titulo, autor, editorial, numeroDePaginas);
-            listaRegistros.Add(registro);
 
 
+            if (Valida()=="")
+            {
+                //Guardamos el isbn del libro
+                valorIsbn = txtCodigo.Text;
 
-            LimpiarCajasDeTexto();
+                //while (!int.TryParse(valorIsbn, out isbn))
+                //{
+                //    MessageBox.Show("El valor de entrada es incorrecto, introduzca un valor entero", "Error de registro",
+                //         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    valorIsbn = txtCodigo.Text;
+                //}
+
+                //guardamos el titulo del libro
+
+                titulo = txtTitulo.Text;
+
+                //leemos el nombre del autor 
+                autor = txtAutor.Text;
+
+                //guardamos la editorial del libro 
+                editorial = txtEditorial.Text;
+
+                //guardamos el valor del numero de paginas 
+                numeroDePaginas = int.Parse(txtPaginas.Text);
+
+                //while (!decimal.TryParse(valorNumeroDePaginas, out numeroDePaginas))
+                //{
+                //    MessageBox.Show("El valor de entrada es incorrecto, introduzca un valor entero", "Error de registro",
+                //          MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    valorNumeroDePaginas = txtPaginas.Text;
+                //}
+
+                registro = new RegistroDeLibros(valorIsbn, titulo, autor, editorial, numeroDePaginas);
+                listaRegistros.Add(registro);
+                LimpiarCajasDeTexto();
+            }
+            else
+            {
+
+                MessageBox.Show("Debe ingresar valores en los campos, el error esta en: "+Valida(), "Hay un campo vacio",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+               
+            }
+
+           
         }
 
         private void txtPaginas_KeyPress(object sender, KeyPressEventArgs e)
@@ -198,5 +171,44 @@ namespace pjSitematico2.Formularios
                 e.Handled = true;
             }
         }
+
+        private void txtTitulo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && !char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private string Valida()
+        {
+            if (txtCodigo.Text.Trim().Length == 0)
+            {
+                txtCodigo.Focus();
+                return "ISBN del libro";
+            }
+            else if (txtAutor.Text.Trim().Length == 0)
+            {
+                txtAutor.Focus();
+                return "Autor del libro";
+            }
+            else if (txtEditorial.Text.Trim().Length == 0)
+            {
+                txtEditorial.Focus();
+                return "Editorial del libro";
+            }
+            else if (txtTitulo.Text.Trim().Length == 0)
+            {
+                txtTitulo.Focus();
+                return "Titulo del libro";
+            }
+            else if (txtPaginas.Text.Trim().Length == 0)
+            {
+                txtPaginas.Focus();
+                return "Cantidad de paginas del libro";
+            }
+            return "";
+        }
+
     }
 }
